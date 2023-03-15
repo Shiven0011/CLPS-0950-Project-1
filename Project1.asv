@@ -1,8 +1,9 @@
-function [decrypted] = Project1('to_decrypt', cipher)
 
-cipher = input('What cipher would you like us to decode? ')
+cipher = input('What cipher would you like us to decode? The input /n');
 
-Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+to_decrypt = input('What is it that needs to be decrypted? \n')
+
+Alphabet = ['A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N' 'O' P''QRSTUVWXYZ];
 map(Alphabet) = 1:length(Alphabet);
 put_in = map(to_decrypt)
 
@@ -18,4 +19,3 @@ if cipher == "Hill"
 
 end
 
-end
