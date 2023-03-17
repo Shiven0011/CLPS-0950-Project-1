@@ -1,11 +1,12 @@
 function [encoded] = caesar_encoder(text)
 %CAESAR_ENCODER shifts the entire message by the same scalar amount. 
-%testing if push works
-
+%   written on 3/16, last modified 3/17 
+%   by Sid Udata
 %   let2num function
+text_cap = upper(text);
 Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 Map(Alphabet(1:26)) = 1:26;
-message = Map(text);
+message = Map(text_cap);
 %   'message' is a vector generated from the letters in 'text'.
 
 shift = randi([1,26], 1, 1);
