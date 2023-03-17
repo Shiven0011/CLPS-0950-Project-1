@@ -4,7 +4,7 @@ function [message] = let2num(text)
 %   written on 3/15
 %   by Sid Udata
 text_cap = upper(text);
-Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-Map(Alphabet(1:26)) = 1:26;
+Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
+Map(Alphabet(1:27)) = 1:27;
 message = Map(text_cap);
 end

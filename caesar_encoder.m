@@ -4,8 +4,8 @@ function [encoded] = caesar_encoder(text)
 %   by Sid Udata
 %   let2num function
 text_cap = upper(text);
-Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-Map(Alphabet(1:26)) = 1:26;
+Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
+Map(Alphabet(1:27)) = 1:27;
 message = Map(text_cap);
 %   'message' is a vector generated from the letters in 'text'.
 
@@ -20,6 +20,7 @@ for ii = 1:length(message)
     end
 end
 
+disp(message);
 disp(encoded);
 
 end
