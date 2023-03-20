@@ -15,8 +15,8 @@ shift = randi([1,26], 1, 1);
 encoded = message + shift;
 
 for ii = 1:length(message)
-    if encoded(ii) >26
-        encoded(ii) = encoded(ii) - 26;
+    if encoded(ii) >27
+        encoded(ii) = encoded(ii) - 27;
     end
 end
 
