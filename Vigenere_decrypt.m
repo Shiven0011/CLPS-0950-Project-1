@@ -4,7 +4,7 @@ keyword = input("Please enter the keyword: ","S");
 keySize1 = size(keyword);
 keySize = keySize1(2);
 
-message = input("Please enter an encrypted message to decrypt: ", "S")
+message = input("Please enter an encrypted message to decrypt: ", "S");
 
 messageSize1 = size(message);
 messageSize = messageSize1(2);
@@ -12,19 +12,16 @@ messageSize = messageSize1(2);
 if (messageSisze <= keySize) && (MessageSize*2 > keySize)
     v = 1:messageSize;
     keyword = [keyword(v)];
-    disp("1111111");
 
 elseif (keySize < messageSize) && (messageSize <= 2*keySize)
     s3 = messageSize - keySize;
     v=1:s3;
     keyword = [keyword, keyword(v)];
-    disp("222222");
 
 elseif messageSize > 2*keySize
     s3 = messageSize - 2*keySize;
     v = 1:s3;
     keyword = [keyword, keyword, keyword(v)];
-    disp('333333');
 end
 
 for i=1:messageSize
