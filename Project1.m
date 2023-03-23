@@ -1,29 +1,29 @@
 % By Shiven Sasipalli
 % Time spent on this section: 2 hrs
 
-cipher = cast(input('What cipher would you like us to decode? The input \n'), char);
+cipher = input('What cipher would you like us to decode? The input \n');
 
 
-text_cap = cast(input('What is it that needs to be decrypted? \n'), char);
+text_cap = input('What is it that needs to be decrypted? \n');
 
 
-function [decrypted] = decryption(cipher, text_cap)
+%function [decrypted] = decryption(cipher, text_cap)
 
-[message] = function conversion(text_cap)
+%[message] = function conversion(text_cap)
 text_cap = upper(text);
 Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 Map(Alphabet(1:26)) = 1:26;
 Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
 Map(Alphabet(1:27)) = 1:27;
-message = Map(text_cap);
+message = map(text_cap);
 
-if cipher == 'Vignere'
+%if cipher == 'Vignere'
 
-end
+%end
 
-if cipher == 'Ceaser'
+%if cipher == 'Ceaser'
 
-end
+%end
 
 if cipher == 'Hill'
     %Take keyword and convert into a 2x2 matrix of numbers
@@ -40,13 +40,18 @@ if cipher == 'Hill'
 
     %Now use determinant to find cipher
     for i = 1:2:length(text_cap)
-        decry = [message(i); message(i+1)]
-        decode_num = decry * inv_key
+        decry = [message(i); message(i+1)];
+        decode_num = decry * inv_key;
+        decrypted_num(i) = [decode_num(i)'];
+        decrypted_num(i+1) = [decode_num(i+1)'];
+    end
+    decrypted = map(decrypted_num);
+    disp(decrypted);
         
 
 
 
 
 end
-end
-end
+%end
+%end
