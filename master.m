@@ -206,7 +206,7 @@ elseif e_or_d == 1
         text_cap = upper(text);
         Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
         Map(Alphabet(1:27)) = 1:27;
-        message = Map(text_cap);
+        message = Map(text_cap)-1;
 
         %Take keyword and convert into a 2x2 matrix of numbers
         key_prompt = 'What is the 4 letter keyword \n';
@@ -216,7 +216,7 @@ elseif e_or_d == 1
         key_unshaped = Map(key_letter);
 
         key = reshape(key_unshaped, 2, 2);
-        key = key'
+        key = key';
 
 
         Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
@@ -278,8 +278,12 @@ elseif e_or_d == 1
         end
         disp(decrypted_num)
 
-        decrypted = Map(decrypted_num);
-        disp(decrypted);
+        decrypted = mod(decrypted_num, 26)+1;
+
+        Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
+
+        decrypted = Alphabet(decrypted);
+        disp(decrypted)
 
     end
     
