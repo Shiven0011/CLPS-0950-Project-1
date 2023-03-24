@@ -25,7 +25,7 @@ message = map(text_cap);
 
 %end
 
-if cipher == 'Hill'
+if cipher == "Hill"
     %Take keyword and convert into a 2x2 matrix of numbers
     key_letter = input("What is the 4 letter keyword? \n")
     conversion(key_letter);

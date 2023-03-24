@@ -66,13 +66,8 @@ if e_or_d == 0
                 output(i) = [encry_num(1)];
                 output(i+1) = [encry_num(2)];
             end       
-
-            Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
-
-            output = mod(output,26)+1;
-            output = Alphabet(output);
-            disp(output)
-           
+            output = mod(output,26)
+            output = Map()
     
     end
 
