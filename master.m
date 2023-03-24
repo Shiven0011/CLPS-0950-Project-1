@@ -285,7 +285,6 @@ elseif e_or_d == 1
             decrypted_num(i) = [decode_num(1)'];
             decrypted_num(i+1) = [decode_num(2)'];
         end
-        disp(decrypted_num)
 
         decrypted = mod(decrypted_num, 26)+1;
 
