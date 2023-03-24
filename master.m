@@ -20,16 +20,15 @@ if e_or_d == 0
     
             text_cap = upper(text);
             Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
-            Map(Alphabet(1:27)) = 1:27;
+            Map(Alphabet(1:27)) = 1:27; % assigns the numbers 1-26 to the letters of the alphabet. 'space' is 27.
             message = Map(text_cap); %'message' is a vector generated from the letters in 'text'.
             
-            shift = randi([1,26], 1, 1); %'shift' is a random scalar that is used to shift the caesar cypher.
-            
-            encoded = message + shift;
+            shift = randi([1,26], 1, 1); 
+            encoded = message + shift; %shifts the entire message by a random number
             
             for ii = 1:length(message)
                 if encoded(ii) >27
-                    encoded(ii) = encoded(ii) - 27;
+                    encoded(ii) = encoded(ii) - 27; %ensures that the assigned number loops. e.g. 27->1, not 28.
                 end
             end
         disp("Here's your ENCODED message!: ");
@@ -45,7 +44,7 @@ if e_or_d == 0
         s1 = size_key(2);
         
         message = input("Please enter a message to encrypt: ", "S");
-        message = message(find(~isspace(message)));
+        message = message(find(~isspace(message))); 
         size_mess = size(message);
         s2 = size_mess(2);
         
@@ -100,7 +99,7 @@ elseif e_or_d == 1
         encoded = input(prompt_encoded);
             
             Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
-            Map(1:27) = Alphabet(1:27);
+            Map(1:27) = Alphabet(1:27); % same shift that the caesar encoder used, just from alpha to numbers.
 
             disp("Your decoded message is somewhere below: ");
             
@@ -112,8 +111,11 @@ elseif e_or_d == 1
                     end
                 end
                 decoded = Map(output);
-                disp(decoded);
-            end
+                disp(decoded); % brute force method that shifts through all the possibilities.
+            end % Since there are only 26 possibilities, the Caesar cypher 
+                % is easily crackable using a computer vs. by hand since it
+                % can do a large number of shifts quickly.
+                
 
     % VIGENERE DECODER
     elseif type_decoder == 3
