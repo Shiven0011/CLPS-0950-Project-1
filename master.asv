@@ -31,10 +31,6 @@ if e_or_d == 0
                     encoded(ii) = encoded(ii) - 27; %ensures that the assigned number loops. e.g. 27->1, not 28.
                 end
             end
-        
-            Alphabet2 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
-            encoded = Alphabet2(encoded);
-
         disp("Here's your ENCODED message!: ");
         disp(encoded);
 
@@ -134,9 +130,8 @@ elseif e_or_d == 1
         encoded = input(prompt_encoded);
             
             Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
-            Map(Alphabet(1:27)) = 1:27; % assigns the numbers 1-26 to the letters of the alphabet. 'space' is 27.
-            encoded = Map(encoded); %'message' is a vector generated from the letters in 'text'.
-            
+            Map(1:27) = Alphabet(1:27); % same shift that the caesar encoder used, just from alpha to numbers.
+
             disp("Your decoded message is somewhere below: ");
             
             for ii = 1:27
@@ -146,11 +141,7 @@ elseif e_or_d == 1
                     output(jj) = output(jj) - 27;
                     end
                 end
-                
-            Alphabet2 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
-            Map2(1:27) = Alphabet2(1:27);
-            decoded = Map2(output);
-            
+                decoded = Map(output);
                 disp(decoded); % brute force method that shifts through all the possibilities.
             end % Since there are only 26 possibilities, the Caesar cypher 
                 % is easily crackable using a computer vs. by hand since it
@@ -225,7 +216,6 @@ elseif e_or_d == 1
         key_unshaped = Map(key_letter);
 
         key = reshape(key_unshaped, 2, 2);
-        key = key'
 
 
         Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
@@ -243,44 +233,42 @@ elseif e_or_d == 1
         determinant = mod(det(inv_key),26);
 
         %Gives Equivalent value for determinant based on paramters of what
-        %is given on the Science Olympiad Test and extended Euclidean
-        %algorithm
-        if determinant == 1
+        %is given on the Science Olympiad Test
+        if determinant == 1;
             determinant = 1;
-        elseif determinant == 3
+        elseif determinant == 3;
             determinant = 9;
-        elseif determinant == 5
+        elseif determinant == 5;
             determinant = 21;
-        elseif determinant == 7
+        elseif determinant == 7;
             determinant =15;
-        elseif determinant == 9
+        elseif determinant == 9;
             determinant = 3;
-        elseif determinant == 11
+        elseif determinant == 11;
             determinant = 19;
-        elseif determinant == 15
+        elseif determinant == 15;
             determinant = 7;
-        elseif determinant == 17
+        elseif determinant == 17;
             determinant = 23;
-        elseif determinant == 19
+        elseif determinant == 19;
             determinant = 11;
-        elseif determinant == 21
+        elseif determinant == 21;
             determinant = 5;
-        elseif determinant == 23
+        elseif determinant == 23;
             determinant = 17;
-        elseif determinant == 25
+        elseif determinant == 25;
             determinant = 25;
         else
             disp("Please choose a new key word and run the program again")
-        end
 
 
         %Finding a equivalent 
         inv_key = mod(determinant .* inv_key, 26);
+        disp(inv_key)
 
-       %Now use determinant to find cipher by dividing message into chunks
-       %of 2 and then multiply by inv_key
+       %Now use determinant to find cipher
         for i = 1:2:length(message)
-            decry = [message(i); message(i+1)];
+            decry = [message(i), message(i+1)]
             decode_num = mtimes(inv_key, decry);
             decrypted_num(i) = [decode_num(1)'];
             decrypted_num(i+1) = [decode_num(2)'];
@@ -295,5 +283,6 @@ elseif e_or_d == 1
 else
     disp('Please try again.');
 
+    end
 end
 
