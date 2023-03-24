@@ -82,13 +82,15 @@ if e_or_d == 0
     % HILL ENCODER
     elseif type_encoder == 4
 
+        %Takes Input of what the user wants to be encoded
         prompt_encoded = 'Enter the message you want to ENCODE:';
         text = input(prompt_encoded);
     
+            %Changes letters into numbers
             text_cap = upper(text);
             Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
             Map(Alphabet(1:27)) = 1:27;
-            message = Map(text_cap) - 1;
+            message = Map(text_cap) - 1; % Adjusts the sequence so that it matches with sequence that the official Codebusters uses
 
             key_prompt = 'What is the 4 letter keyword:';
             key_letter = input(key_prompt);
@@ -108,7 +110,7 @@ if e_or_d == 0
 
             Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
 
-            output = mod(output,26)+1;
+            output = mod(output,26)+1; %Undoes the earlier adjustment to letter to number conversion and does mod to fit it into 1:27 range
             output = Alphabet(output);
             disp(output)
            
