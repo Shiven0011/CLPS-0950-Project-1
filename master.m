@@ -178,38 +178,53 @@ elseif e_or_d == 1
     % VIGENERE DECODER
     elseif type_decoder == 3
         
+        %Creating an alphabet vector which will be related to the position of the
+        %letters (1-26). Only uppercase inputs will work for both inputs!
+
         letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
         keyword = input("Please enter the keyword: ","S");
         
+        %Measuring the size of the keyword (number of letters)
         keySize1 = size(keyword);
         keySize = keySize1(2);
         
+        %KEY NOTE: THE MESSAGE SHOULD BE INPUTTED AS IF THE PHRASE HAS NO
+        %SPACES IN BETWEEN WORDS (Ex. one must enter the encrypted version of HISHREY, not HI SHREY)!!
         message = input("Please enter an encrypted message to decrypt: ", "S");
         
+        %Measuring the size of the inputted message (number of letters)
         messageSize1 = size(message);
         messageSize = messageSize1(2);
         
         if (messageSize <= keySize) && (MessageSize*2 > keySize)
             v = 1:messageSize;
             keyword = [keyword(v)];
-        
+        %This first if statement considers the possibility that the keyword is
+        %longer than the actual message itself!
+
         elseif (keySize < messageSize) && (messageSize <= 2*keySize)
             s3 = messageSize - keySize;
             v=1:s3;
             keyword = [keyword, keyword(v)];
-        
+        %This second elseif statement considers the possibility that the message length is
+        %inbetween the size of the keyword and twice the size of the keyword!
+
         elseif messageSize > 2*keySize
             s3 = messageSize - 2*keySize;
             v = 1:s3;
             keyword = [keyword, keyword, keyword(v)];
         end
-        
+        %This for loop accounts for cases where the resultant numerical value is
+        %greater than 26, which is out of the scope of the alphabet.
+
         for i=1:messageSize
             messageNumpos(i) = find(letters == (message(i)))-1;
             keyNumpos(i) = find(letters == (keyword(i)))-1;
         end
-        numShift = messageNumpos - keyNumpos + 1;
+        numShift = messageNumpos - keyNumpos + 1; %Here is the main difference in code between encoder and decoder. Rather than adding the keyword shift, we're subtracting now!
         
+        %This for loop accounts for cases where the resultant numerical value is
+        %greater than 26, which is out of the scope of the alphabet.
         for i=1:messageSize
             if numShift(i) < 0
                 numShift(i) = mod(numShift(i), 26);
@@ -218,6 +233,8 @@ elseif e_or_d == 1
             end
         end
         
+        %Converting the final numbers back to letters for display of the encrypted
+        %message!
         for i = 1:messageSize
             decFinal(i) = letters(numShift(i));
         end
