@@ -82,15 +82,15 @@ if e_or_d == 0
     % HILL ENCODER
     elseif type_encoder == 4
 
-
-        
+        %Takes Input of what the user wants to be encoded
         prompt_encoded = 'Enter the message you want to ENCODE:';
         text = input(prompt_encoded);
     
+            %Changes letters into numbers
             text_cap = upper(text);
             Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
             Map(Alphabet(1:27)) = 1:27;
-            message = Map(text_cap) - 1;
+            message = Map(text_cap) - 1; % Adjusts the sequence so that it matches with sequence that the official Codebusters uses
 
             key_prompt = 'What is the 4 letter keyword:';
             key_letter = input(key_prompt);
@@ -110,7 +110,7 @@ if e_or_d == 0
 
             Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
 
-            output = mod(output,26)+1;
+            output = mod(output,26)+1; %Undoes the earlier adjustment to letter to number conversion and does mod to fit it into 1:27 range
             output = Alphabet(output);
             disp(output)
            
@@ -228,15 +228,48 @@ elseif e_or_d == 1
         inv_key1(1,2) = -1 * (key1(1,2) - 1);
         inv_key1(2,1) = -1 * (key1(2,1) - 1);
         inv_key = mod(inv_key1, 26);
+
+        %Determinant determinantion
         determinant = mod(det(inv_key),26);
-        inv_key = mod(inv_key .* (1/determinant), 26);
+
+        %Gives Equivalent value for determinant based on paramters of what
+        %is given on the Science Olympiad Test
+        if determinant == 1;
+            determinant = 1;
+        elseif determinant == 3;
+            determinant = 9;
+        elseif determinant == 5;
+            determinant = 21;
+        elseif determinant == 7;
+            determinant =15;
+        elseif determinant == 9;
+            determinant = 3;
+        elseif determinant == 11;
+            determinant = 19;
+        elseif determinant == 15;
+            determinant = 7;
+        elseif determinant == 17;
+            determinant = 23;
+        elseif determinant == 19;
+            determinant = 11;
+        elseif determinant == 21;
+            determinant = 5;
+        elseif determinant == 23;
+            determinant = 17;
+        elseif determinant == 25;
+            determinant = 25;
+        else
+            disp("Please choose a new key word and run the program again")
+
+
+        %Finding a equivalent 
+        inv_key = mod(determinant .* inv_key, 26);
         disp(inv_key)
-        fill = mod([9, 25], 26)
 
        %Now use determinant to find cipher
         for i = 1:2:length(message)
             decry = [message(i), message(i+1)]
-            decode_num = decry * inv_key;
+            decode_num = mtimes(inv_key, decry);
             decrypted_num(i) = [decode_num(1)'];
             decrypted_num(i+1) = [decode_num(2)'];
         end
@@ -250,5 +283,6 @@ elseif e_or_d == 1
 else
     disp('Please try again.');
 
+    end
 end
 

@@ -216,6 +216,7 @@ elseif e_or_d == 1
         key_unshaped = Map(key_letter);
 
         key = reshape(key_unshaped, 2, 2);
+        key = key'
 
 
         Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
@@ -228,15 +229,50 @@ elseif e_or_d == 1
         inv_key1(1,2) = -1 * (key1(1,2) - 1);
         inv_key1(2,1) = -1 * (key1(2,1) - 1);
         inv_key = mod(inv_key1, 26);
-        determinant = mod(det(inv_key),26);
-        inv_key = mod(inv_key .* (1/determinant), 26);
-        disp(inv_key)
-        fill = mod([9, 25], 26)
 
-       %Now use determinant to find cipher
+        %Determinant determinantion
+        determinant = mod(det(inv_key),26);
+
+        %Gives Equivalent value for determinant based on paramters of what
+        %is given on the Science Olympiad Test and extended Euclidean
+        %algorithm
+        if determinant == 1
+            determinant = 1;
+        elseif determinant == 3
+            determinant = 9;
+        elseif determinant == 5
+            determinant = 21;
+        elseif determinant == 7
+            determinant =15;
+        elseif determinant == 9
+            determinant = 3;
+        elseif determinant == 11
+            determinant = 19;
+        elseif determinant == 15
+            determinant = 7;
+        elseif determinant == 17
+            determinant = 23;
+        elseif determinant == 19
+            determinant = 11;
+        elseif determinant == 21
+            determinant = 5;
+        elseif determinant == 23
+            determinant = 17;
+        elseif determinant == 25
+            determinant = 25;
+        else
+            disp("Please choose a new key word and run the program again")
+        end
+
+
+        %Finding a equivalent 
+        inv_key = mod(determinant .* inv_key, 26);
+
+       %Now use determinant to find cipher by dividing message into chunks
+       %of 2 and then multiply by inv_key
         for i = 1:2:length(message)
-            decry = [message(i), message(i+1)]
-            decode_num = decry * inv_key;
+            decry = [message(i); message(i+1)];
+            decode_num = mtimes(inv_key, decry);
             decrypted_num(i) = [decode_num(1)'];
             decrypted_num(i+1) = [decode_num(2)'];
         end
