@@ -31,6 +31,10 @@ if e_or_d == 0
                     encoded(ii) = encoded(ii) - 27; %ensures that the assigned number loops. e.g. 27->1, not 28.
                 end
             end
+        
+            Alphabet2 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
+            encoded = Alphabet2(encoded);
+
         disp("Here's your ENCODED message!: ");
         disp(encoded);
 
@@ -130,8 +134,9 @@ elseif e_or_d == 1
         encoded = input(prompt_encoded);
             
             Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
-            Map(1:27) = Alphabet(1:27); % same shift that the caesar encoder used, just from alpha to numbers.
-
+            Map(Alphabet(1:27)) = 1:27; % assigns the numbers 1-26 to the letters of the alphabet. 'space' is 27.
+            encoded = Map(encoded); %'message' is a vector generated from the letters in 'text'.
+            
             disp("Your decoded message is somewhere below: ");
             
             for ii = 1:27
@@ -141,7 +146,11 @@ elseif e_or_d == 1
                     output(jj) = output(jj) - 27;
                     end
                 end
-                decoded = Map(output);
+                
+            Alphabet2 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
+            Map2(1:27) = Alphabet2(1:27);
+            decoded = Map2(output);
+            
                 disp(decoded); % brute force method that shifts through all the possibilities.
             end % Since there are only 26 possibilities, the Caesar cypher 
                 % is easily crackable using a computer vs. by hand since it
